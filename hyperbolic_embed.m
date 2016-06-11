@@ -1,4 +1,4 @@
-function z = hyperbolic_embed(face,u)    
+function z = hyperbolic_embed(face,u)
     nv = size(u,1);
     z = zeros(nv,1);
     ind = false(nv,1);
@@ -15,7 +15,7 @@ function z = hyperbolic_embed(face,u)
         if indf(i)
             queue = queue(2:end);
             continue
-        end        
+        end
         z(face(i,:)) = embed_face(face(i,:));    
         indf(i) = true;
         f2 = fr(i,:);
@@ -41,7 +41,9 @@ function z = hyperbolic_embed(face,u)
         zi(2) = z(fi(2));
         r1 = el(fi(1),fi(3));
         r2 = el(fi(2),fi(3));
-        p = circle_circle_intersection(zi(1),r1,zi(2),r2);
+        [c1,r1] = hyper_circle_to_circle(zi(1),r1);
+        [c2,r2] = hyper_circle_to_circle(zi(2),r2);
+        p = circle_circle_intersection(c1,r1,c2,r2);
         if isnan(p)
             error('ERROR: two circles do not intersect, invalid metric');
         end
@@ -49,27 +51,6 @@ function z = hyperbolic_embed(face,u)
         zi = zi(order);
         ind(fi) = true;
     end
-end
-
-function p = circle_circle_intersection(c1,r1,c2,r2)
-    [c1,r1] = hyper_circle_to_circle(c1,r1);
-    [c2,r2] = hyper_circle_to_circle(c2,r2);
-    p = zeros(size(c1));
-    dz = c2 - c1;
-    d = abs(dz);
-    a = (r1.*r1-r2.*r2+d.*d)./d/2;
-    z0 = c1 + dz.*a./d;
-    h = sqrt(r1.*r1-a.*a);
-    rz = 1i*dz.*h./d;
-    p1 = z0 + rz;
-    p2 = z0 - rz;
-    e1 = c2-c1;
-    e2 = p1-c1;
-    ind = (real(e1).*imag(e2)-imag(e1).*real(e2))>0;
-    p(ind) = p1(ind);
-    p(~ind) = p2(~ind);
-    ind = d>r1+r2 | d<abs(r2-r1);
-    p(ind) = nan;
 end
 
 function [c,r] = hyper_circle_to_circle(c,r)
@@ -82,3 +63,4 @@ function [c,r] = hyper_circle_to_circle(c,r)
     c = -b/2;
     r = sqrt(abs(b).*abs(b)/4-d);
 end
+

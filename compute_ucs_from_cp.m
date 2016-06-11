@@ -1,30 +1,24 @@
 function [ucs,ucs_z,ucs_fz] = compute_ucs_from_cp(face,z,fz,bp)
-%
+
 bd = compute_bd(face,z);
 nb = length(bp);
 ucs = cell(nb,1);
 ucs_vi = cell(nb,1);
 bb = cbb(nb);
-
 bd2 = [bd;bd];
-
 z_new = z;
-
 nv = size(z_new,1);
 
 for i = 1:nb
     ui = cell(1,nb-1);
     ui_vi = cell(1,nb-1);
     z_t = z_new;
-%     v_father = (1:size(z,1))';
-%     k = 0;
-%     s = 0;
+
     ui{1} = z_t;
     vi = true(nv,1);
     vi(bd) = false;
     ui_vi{1} = vi;
     for j = 1:nb-2
-%         k = k+1;
         p = z_t(bp,1);
         z_t = deck_euclidean(z_t,p(bb(i+j,3)),p(bb(i+j,1)));
         
@@ -43,11 +37,10 @@ for i = 1:nb
         vi(chain2) = false;
         ui_vi{j+1} = vi;
     end
-%     ui{nb-1} = z_c;
     ucs{i} = ui;
     ucs_vi{i} = ui_vi;
 end
-% ucs_z = unique(z_new,'rows');
+
 vi = true(nv,1);
 vi(bd) = false;
 ci = 0;
@@ -77,7 +70,6 @@ for i = 1:nb
         ci = ci + sum(vi);
     end
 end
-% face_ucs = face_new;
 
 function bb = cbb(n)
 bb = zeros(2*n+1,4);

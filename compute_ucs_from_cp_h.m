@@ -5,7 +5,6 @@ nb = length(bp);
 ucs = cell(nb,1);
 ucs_vi = cell(nb,1);
 bb = cbb(nb);
-
 bd2 = [bd;bd];
 z_new = z;
 nv = size(z_new,1);
