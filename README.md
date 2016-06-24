@@ -7,7 +7,7 @@ Compute universal covering space for closed surfaces of genus >= 1. Universal co
 * compute homotopy basis (in fact any cut graph that cuts surface into simplied-connected would be acceptable, but currently only homotopy basis supported)
 * slice surface open to obtain base domain
 * embed base domain onto Euclidean plane or Poincare disk
-* generate universal covering space by gluing copoies of base domain under deck transformation
+* generate universal covering space by gluing copies of base domain under deck transformation
 
 ## Example:
 Below is a genus 2 surface and a homotopy basis on it (red loops)
@@ -18,7 +18,7 @@ Below left is the base domain embedded onto Poincare disk, right is generated un
 
 ![alt text](result/eight.ucs.png "base domain and universal covering space")
 
-See demo.m for detailed step to obtain these pictures.
+See demo.m for detailed steps to obtain these pictures.
 
 ## Dependency:
 * [geometry-processing-package][GPP] (download lastest version)
