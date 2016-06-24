@@ -1,7 +1,7 @@
 function ucs = compute_ucs(face,vertex,z,hb,father)
 
 [bd,bdn,bdc] = bd_multiplicity(face,z,hb,father);
-[chain,bd,bdn,bdc,mc] = compute_bd_chain(bd,bdn,bdc);
+[chain,mc] = compute_bd_chain(bd,bdn,bdc);
 decks = compute_decks_from_chain_h(z,chain,mc);
 bp = compute_bp_from_decks(decks,mc,z(bd(1)));
 [sp,ms] = segment_pair(bd,father(bd));

@@ -19,4 +19,4 @@ ct = cos(t);
 st = sin(t);
 x = center(1)+radii*ct;
 y = center(2)+radii*st;
-plot(x,y,style,'LineWidth',0.5)
+plot(x,y,style,'LineWidth',0.5);

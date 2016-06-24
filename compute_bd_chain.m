@@ -1,13 +1,8 @@
-function [chain,bd,bdn,bdc,mc] = compute_bd_chain(bd,bdn,bdc)
+function [chain,mc] = compute_bd_chain(bd,bdn,bdc)
 
 nb = length(bd);
 ns = max(bdn);
 chain = cell(ns,1);
-
-i = find(bdn==ns,1,'first');
-bd = bd([i:end,1:i-1]);
-bdn = bdn([i:end,1:i-1]);
-bdc = bdc([i:end,1:i-1]);
 
 s = 1;
 k = 1;
